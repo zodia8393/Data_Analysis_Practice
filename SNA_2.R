@@ -39,11 +39,22 @@ RSelenium_Connect=function(){
     pw$sendKeysToElement(list("1q2w3e4r1!"))
     Sys.sleep(1)
     login_btn$clickElement()
+    Sys.sleep(3)
+    btn1<-remDr$findElement(using='xpath',value='//*[@id="react-root"]/section/main/div/div/div/section/div/button')
+    btn1$clickElement()
+    Sys.sleep(3)
+    btn2<-remDr$findElement(using='xpath',value='/html/body/div[6]/div/div/div/div[3]/button[2]')
+    btn2$clickElement()
+    
+    #검색창 
+    search<-remDr$findElement(using='xpath',value='//*[@id="react-root"]/section/nav/div[2]/div/div/div[2]/input')
+    search$clickElement()
+    search$sendKeysToElement(list('#패션'))
   })
 }
 
 RSelenium_Connect()
 
 
-#현재 진행상황 RSelenium으로 크롬 열고 인스타 로그인까지 완료
+
 
