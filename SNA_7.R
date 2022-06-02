@@ -1,6 +1,6 @@
 getwd()
-setwd('C:/Users/User/Documents/WS') #Áı ÄÄÇ»ÅÍ¿ë µğ·ºÅÍ¸®
-#setwd('C:/Users/student/Documents/R_WS')#ÇĞ±³ °­ÀÇ½Ç¿ë µğ·ºÅÍ¸®
+setwd('C:/Users/User/Documents/WS') #ì§‘ ì»´í“¨í„°ìš© ë””ë ‰í„°ë¦¬
+#setwd('C:/Users/student/Documents/R_WS')#í•™êµ ê°•ì˜ì‹¤ìš© ë””ë ‰í„°ë¦¬
 
 library(RSelenium)
 library(wdman)
@@ -14,43 +14,47 @@ remDr<-remoteDriver(remoteServerAddr='localhost',
 remDr$open()
 remDr$navigate('https://www.instagram.com/')
 
-#¾ÆÀÌµğ ºñ¹ø
+#ì•„ì´ë”” ë¹„ë²ˆ
 id<-remDr$findElement(using="xpath",value='//*[@id="loginForm"]/div/div[1]/div/label/input')
 pw<-remDr$findElement(using="xpath",value='//*[@id="loginForm"]/div/div[2]/div/label/input')
 
-#·Î±×ÀÎ ¹öÆ°
+#ë¡œê·¸ì¸ ë²„íŠ¼
 login_btn<-remDr$findElement(using="xpath",value='//*[@id="loginForm"]/div/div[3]/button/div')
 
 id$sendKeysToElement(list("testaccount00118"))
 pw$sendKeysToElement(list("1q2w3e4r1!"))
 login_btn$clickElement()
 
-#·Î±×ÀÎ½Ã ³ª¿À´Â ¾Ë¸²¼³Á¤
+#ë¡œê·¸ì¸ì‹œ ë‚˜ì˜¤ëŠ” ì•Œë¦¼ì„¤ì •
 btn1<-remDr$findElement(using='xpath',value='//*[@id="react-root"]/section/main/div/div/div/section/div/button')
 btn1$clickElement()
 
-btn2<-remDr$findElement(using='css',value='body > div.RnEpo.Yx5HN > div > div > div > div.mt3GC > button.aOOlW.bIiDR')
-btn2$clickElement() #btn2°¡ ¿¡·¯°¡¹ß»ıÇÒ °æ¿ì btn3½ÇÇàÇÏ±â
+btn2<-remDr$findElement(using='css',value='#mount_0_0_j5 > div > div:nth-child(1) > div > div:nth-child(4) > div > div > div.rq0escxv.l9j0dhe7.du4w35lb > div > div.iqfcb0g7.tojvnm2t.a6sixzi8.k5wvi7nf.q3lfd5jv.pk4s997a.bipmatt0.cebpdrjk.qowsmv63.owwhemhu.dp1hu0rb.dhp61c6y.l9j0dhe7.iyyx5f41.a8s20v7p > div > div > div > div > div > div > div > div._a9-z > button._a9--._a9_0')
+btn2$clickElement() #btn2ê°€ ì—ëŸ¬ê°€ë°œìƒí•  ê²½ìš° btn3ì‹¤í–‰í•˜ê¸°
 
 
-#°Ë»öÃ¢ 
-searchword<-'±¹³»¿©Çà'
+
+#ê²€ìƒ‰ì°½ 
+searchword<-'ë‚¨ìí˜¼ìì—¬í–‰'
 remDr$navigate(paste0('https://www.instagram.com/explore/tags/',searchword))
 Sys.sleep(2)
 
-#Áßº¹ ÇØ½ÃÅÂ±× Á¦°Å º¯¼ö »ı¼º
+#ì¤‘ë³µ í•´ì‹œíƒœê·¸ ì œê±° ë³€ìˆ˜ ìƒì„±
 res<-remDr$getPageSource() %>% `[[`(1)
 url<-res %>% read_html() %>% 
   html_nodes(css='a.LFGsB.xil3i') %>% 
   html_text()
 removenum<-length(url)
 
-#ÃÖ±Ù °Ô½Ã±Û Å¬¸¯
+
+
+
+#ìµœê·¼ ê²Œì‹œê¸€ í´ë¦­
 bu1<-remDr$findElement(using='css',value='#react-root > section > main > article > div.EZdmt > div > div > div:nth-child(1) > div:nth-child(1) > a > div.eLAPa > div._9AhH0')
 bu1$clickElement()
 
 
-#´ÙÀ½ÆäÀÌÁö ³Ñ±â±â
+#ë‹¤ìŒí˜ì´ì§€ ë„˜ê¸°ê¸°
 bu2<-remDr$findElement(using='css',value='body > div.RnEpo._Yhr4 > div.Z2Inc._7c9RR > div > div > button > div > span > svg')
 bu2$clickElement()
 
@@ -66,7 +70,7 @@ for (i in 1:100){
         bu3$clickElement()
       },
       error=function(NoSuchElement){
-        print('´ë´ñ±ÛÀÌ ¾øÀ»°æ¿ì ¹ß»ıÇÏ´Â ¿À·ùÀÌ´Ï ÁøÇàÇÏ½Ã¸é µË´Ï´Ù')
+        print('ëŒ€ëŒ“ê¸€ì´ ì—†ì„ê²½ìš° ë°œìƒí•˜ëŠ” ì˜¤ë¥˜ì´ë‹ˆ ì§„í–‰í•˜ì‹œë©´ ë©ë‹ˆë‹¤')
       }
     )
   }
@@ -82,7 +86,7 @@ for (i in 1:100){
 }
 rslt
 
-#µ¥ÀÌÅÍ ¼öÁı½Ã ¿À·¡µÈ°Ô½Ã±ÛÀÏ¼ö·Ï ´ñ±Û°¹¼ö°¡ ¸¹¾ÆÁü
+#ë°ì´í„° ìˆ˜ì§‘ì‹œ ì˜¤ë˜ëœê²Œì‹œê¸€ì¼ìˆ˜ë¡ ëŒ“ê¸€ê°¯ìˆ˜ê°€ ë§ì•„ì§
 
 library(stringr)
 result<-list()
@@ -96,39 +100,72 @@ for (i in 1:length(rslt)){
 
 result
 
-#ÀüÃ³¸®ÇÏ±â
-#Æ¯¼ö¹®ÀÚ ¹× ÀÌ¸ğÆ¼ÄÜ Á¦°Å
+#ì „ì²˜ë¦¬í•˜ê¸°
+#íŠ¹ìˆ˜ë¬¸ì ë° ì´ëª¨í‹°ì½˜ ì œê±°
 rs_1<-list()
 for (i in 1: length(result)){
-  rs_1[i]<-list(str_replace_all(result[[i]],"[^°¡-ÆR]",""))
+  rs_1[i]<-list(str_replace_all(result[[i]],"[^ê°€-í£]",""))
 }
 
-#°ø¹é Á¦°Å
+#ê³µë°± ì œê±°
 rs_2<-list()
 for (i in 1:length(rs_1)){
   rs_2[[i]]<-rs_1[[i]][rs_1[[i]]!=""]
 }
 rs_2
 
-#Æ¯Á¤ Áßº¹ Å°¿öµå ifelse¹® Á¤¸®
+#íŠ¹ì • ì¤‘ë³µ í‚¤ì›Œë“œ ifelseë¬¸ ì •ë¦¬
 
 rs_3<-list()
 for (i in 1:length(rs_2)){
-  rs_3[[i]]<-ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ÈªÄ«ÀÌµµ¿©Çà'))],'ÈªÄ«ÀÌµµ',
-             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'È¥ÀÚ¿©Çà'))],'È¥Çà',
-             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'È¥Çà½ºÅ¸±×·¥'))],'È¥Çà',rs_2[[i]])))
+  rs_3[[i]]<-ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ë§íŒ”ì„ íŒ”í™˜ì˜'))],'',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ì„ íŒ”'))],'',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'íŒ”'))],'',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ì¢‹ì•„ìš”'))],'',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ì¢‹ë°˜'))],'',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ê²Œí•˜'))],'ê²ŒìŠ¤íŠ¸í•˜ìš°ìŠ¤',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ê°•ì›ë„ì—¬í–‰ì§€ì¶”ì²œ'))],'ê°•ì›ë„',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ê°•ì›ë„ê´€ê´‘ì§€'))],'ê°•ì›ë„',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ê°•ì›ë„ì›Œí¬ìˆ'))],'ê°•ì›ë„',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ê±°ì œê°€ë³¼ë§Œí•œê³³'))],'ê±°ì œë„',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ê±°ì œê´€ê´‘ì§€'))],'ê±°ì œë„',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ê±°ì œë„ê°ˆë§Œí•œê³³'))],'ê±°ì œë„',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ê±°ì œë„ì—¬í–‰'))],'ê±°ì œë„',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ê±°ì œì—¬í–‰'))],'ê±°ì œë„',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ê±°ì œì—¬í–‰ì§€ì¶”ì²œ'))],'ê±°ì œë„',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ê±°ì œì¹´í˜'))],'ê±°ì œë„ì¹´í˜',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ê²ŒìŠ¤íŠ¸í•˜ìš°ìŠ¤ì¶”ì²œ'))],'ê²ŒìŠ¤íŠ¸í•˜ìš°ìŠ¤',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'êµ­ë‚´ì—¬í–‰ì§€'))],'êµ­ë‚´ì—¬í–‰',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'êµ­ë‚´ë°•ì¼ì—¬í–‰'))],'êµ­ë‚´ì—¬í–‰',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ë‚¨ìê²ŒìŠ¤íŠ¸'))],'ë‚¨ìê²ŒìŠ¤íŠ¸í•˜ìš°ìŠ¤',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ë…„ìƒ'))],'',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ë‰´ìš•ìŠ¤ëƒ…ì‚¬ì§„'))],'ë‰´ìš•',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ë‰´ìš•ì—¬í–‰ìŠ¤ëƒ…'))],'ë‰´ìš•',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ë‹Œë¹ˆíˆ¬ì–´'))],'ë‹Œë¹ˆ',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ë‹¹ì¼ì¹˜ê¸°ì—¬í–‰ì§€ì¶”ì²œ'))],'ë‹¹ì¼ì¹˜ê¸°ì—¬í–‰ì§€',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ëŒ€êµ¬ê°€ë³¼ë§Œí•œê³³'))],'ëŒ€êµ¬',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ëŒ€êµ¬ê´€ê´‘ì§€'))],'ëŒ€êµ¬',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ì†Œí†µ'))],'',
+             ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],'ì¸ì¹œ'))],'',rs_2[[i]])))))))))))))))))))))))))))))
 }
 
+#ifelse(rs_2[[i]]%in%rs_2[[i]][which(str_detect(rs_2[[i]],''))],'',
 rs_3
 
+rs_3a<-list()
+for(i in 1:length(rs_3)){
+  rs_3a[[i]]<-rs_3[[i]][rs_3[[i]]!=""]
+}
 
-#uniqueÅëÇØ Áßº¹ ÇÕÄ¡±â
-rs_4<-unique(rs_3)
 
 
-#Combn() À§ÇØ n<mº¸´Ù ÀÛÀº ¸®½ºÆ® Á¦°Å
-#¸®½ºÆ®ÀÇ ¿ø¼ÒÀÇ °³¼ö°¡ 2°³ÀÌÇÏÀÎ ¸®½ºÆ® È®ÀÎ
-#Á¶°Ç¿¡ ¸¸Á·ÇÏ´Â ¸®½ºÆ® »èÁ¦
+#uniqueí†µí•´ ì¤‘ë³µ í•©ì¹˜ê¸°
+rs_4<-unique(rs_3a)
+
+
+#Combn() ìœ„í•´ n<më³´ë‹¤ ì‘ì€ ë¦¬ìŠ¤íŠ¸ ì œê±°
+#ë¦¬ìŠ¤íŠ¸ì˜ ì›ì†Œì˜ ê°œìˆ˜ê°€ 2ê°œì´í•˜ì¸ ë¦¬ìŠ¤íŠ¸ í™•ì¸
+#ì¡°ê±´ì— ë§Œì¡±í•˜ëŠ” ë¦¬ìŠ¤íŠ¸ ì‚­ì œ
 
 for (i in 1: length(rs_4)){
   if(length(rs_4[[i]])<3){
@@ -138,26 +175,27 @@ for (i in 1: length(rs_4)){
   }
 }
 
+rs_4
 
-#°Ô½Ã±Û ¸¶´Ù ¸®½ºÆ® Ç®°í combnÀ¸·Î Á¶ÇÕ
-#Graph·Î ¸®½ºÆ®º° ¿¬°áµÈ ¸µÅ©¼ö °¡ÁßÄ¡
-#Source Target Weight º¯¼ö¸í »ı¼º
-#for¹®À¸·Î °Ô½Ã±Û ¸ğµÎ ¹İº¹ÇÏ¿© rbind
-#Source Target Áßº¹µÈ µ¥ÀÌÅÍ °¡ÁßÄ¡ ÇÕ»ê
+#ê²Œì‹œê¸€ ë§ˆë‹¤ ë¦¬ìŠ¤íŠ¸ í’€ê³  combnìœ¼ë¡œ ì¡°í•©
+#Graphë¡œ ë¦¬ìŠ¤íŠ¸ë³„ ì—°ê²°ëœ ë§í¬ìˆ˜ ê°€ì¤‘ì¹˜
+#Source Target Weight ë³€ìˆ˜ëª… ìƒì„±
+#forë¬¸ìœ¼ë¡œ ê²Œì‹œê¸€ ëª¨ë‘ ë°˜ë³µí•˜ì—¬ rbind
+#Source Target ì¤‘ë³µëœ ë°ì´í„° ê°€ì¤‘ì¹˜ í•©ì‚°
 
 rs_test<-data.frame()
 
 for (i in 1: length(rs_4)){
   tmp<-as.data.frame(unlist(rs_4[i]),stringAsFactors=F)
-  colnames(tmp)<="Source"
+  colnames(tmp)<-"Source"
   tmp<-t(combn(tmp$Source,2))
   colnames(tmp)<-c("Source","Target")
-  df_tml<-as.data.frame(tmp)
+  df_tmp<-as.data.frame(tmp)
   
   library(igraph)
   net_graph<-graph.data.frame(df_tmp,directed=FALSE)
   
-  #°¡ÁßÄ¡ ÃøÁ¤
+  #ê°€ì¤‘ì¹˜ ì¸¡ì •
   weight_1<-centr_degree(net_graph,mode='all')
   weight_2<-rep(weight_1$res[1],length(tmp)/2)
   
@@ -168,16 +206,23 @@ for (i in 1: length(rs_4)){
   rs_test<-rbind(rs_test,final)
 }
 
-#µ¥ÀÌÅÍ È®ÀÎÇÏ±â
+#ë°ì´í„° í™•ì¸í•˜ê¸°
 print(rs_test)
 
+g<-graph.data.frame(rs_test,directed = F)
+plot.igraph(g1)
+g1<-delete.edges(g2,E(g2)[weight<0.6])
+plot(g1,edge.arrow.size=0.5,vertex.label=NA,vertex.size=3)
+plot(g1,layout=layout.auto,edge.arrow.size=0.5,vertex.size=3)
 
+head(sort(degree(g2),decreasing = TRUE))
+sort(closeness(g1,mode='all'),decreasing = TRUE)
+sort(betweenness(g1),decreasing = TRUE)
+eigen_centrality(g1)
+a1<-sort(eigen_centrality(g1)$vector,decreasing=TRUE)
+head(a1)
 
-
-
-
-
-
-
-
+Isolated=which(degree(g1)==0)
+g2<-delete.vertices(g1,Isolated)
+plot.igraph(g2)
 
